@@ -1,0 +1,79 @@
+class adc 
+{
+public: 
+  adc();
+  ~adc();
+  void begin(uint8_t pin,uint8_7 bits_resolution,float ref_voltage);
+  uint16_readRaw();
+  float readVoltage();
+private:
+  uint8_t _pin;
+  float_conversion;
+  
+class rgb 
+{
+public: 
+  rgb();
+  ~rgb();
+  void begin(uint8t_t pin[3], uint8_t channel[3],double frequency=1000,uint8_t bit_resolution = 8,bool on_state=HIGH);
+  void SetColor(uint8_t red, uint8_t green,uint8_t blue);
+  
+private:
+PWM pwm[3];
+
+
+Class PWM 
+{
+public:
+  PWM()
+  ~PWM();
+  void setup(uint8_t pin, uint8_t channel, double frequency, uint8_t bit_resolution,bool on_state=HIGH);
+  void setDuty(float duty_cycle);
+  void setDigitalLevel(uint32_t level);
+  void setFrequency(float frequency);
+  void attachPin(uint8_t pin, bool on_state=HIGH);
+  void detachPin(uint8_t pin);
+
+protected:
+  uint8_t _pin;
+  uint8_t _channel;
+  uint32_t _digital_range;
+  float _futy_cycle;
+  float _frequency;
+  
+void loop()
+{ 
+  if (millis()- start_time >= led_on_time)
+  {
+    switch (state)
+    {
+      case 0:
+        state=1;
+        sensor[0]=adc_ldr.readRaw();
+        rgb_pro.setColor(0,255,0);
+        break;
+       
+      
+      case1:
+        state=2;
+        sensor[1] = adc_ldr.readRaw();
+        rgb_pro.setColor(0,0,255);
+        break;
+        
+      case 2:
+        state=0;
+        sensor[2] = adec_ldr.readRaw();
+        Serial.printf("%d,%d,%d\n",sensor[0],sensor[1],sensor[2];
+          rgb_pro.setColor(255,0,0);
+        break;
+      
+      start_time=millis();
+  }
+  
+  if(Serial.available())
+  {
+    data__in =Serial.readStringUntil('\n');
+    led on time = data in.toInt();
+      
+    
+  
